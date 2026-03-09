@@ -1,0 +1,55 @@
+server:
+  port: 8666
+
+spring:
+  application:
+    name: movie-info-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/moviedb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      # password: yourpassword  # uncomment if Redis auth is enabled
+      timeout: 2000ms
+
+  cache:
+    type: redis
+    redis:
+      time-to-live: 3600
+
+movie:
+  api:
+    omdb:
+      base-url: http://www.omdbapi.com
+      search-url: ${movie.api.omdb.base-url}/?s={title}&apikey={key}
+      detail-url: ${movie.api.omdb.base-url}/?i={imdbId}&apikey={key}
+      api-key: 3824d2c6
+    tmdb:
+      base-url: https://api.themoviedb.org/3
+      search-url: ${movie.api.tmdb.base-url}/search/movie?query={title}&include_adult=true&api_key={key}
+      detail-url: ${movie.api.tmdb.base-url}/movie/{id}/credits?api_key={key}
+      api-key: 113a38a7eded29ec82bb1b0fa293b7b4
+
+  cache:
+    ttl-seconds: 360
+
+logging:
+  level:
+    root: info
+    movieinfo: DEBUG
+    org.springframework.cache: DEBUG
