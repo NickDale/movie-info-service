@@ -38,12 +38,12 @@ movie:
       base-url: http://www.omdbapi.com
       search-url: ${movie.api.omdb.base-url}/?s={title}&apikey={key}
       detail-url: ${movie.api.omdb.base-url}/?i={imdbId}&apikey={key}
-      api-key: 3824d2c6
+      api-key: <api-key>
     tmdb:
       base-url: https://api.themoviedb.org/3
       search-url: ${movie.api.tmdb.base-url}/search/movie?query={title}&include_adult=true&api_key={key}
       detail-url: ${movie.api.tmdb.base-url}/movie/{id}/credits?api_key={key}
-      api-key: 113a38a7eded29ec82bb1b0fa293b7b4
+      api-key: <api-key>
 
   cache:
     ttl-seconds: 360
